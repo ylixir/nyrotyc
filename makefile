@@ -2,7 +2,7 @@
 #This work is free. You can redistribute it and/or modify it under the terms
 #of the Just World License. See the top level LICENSE.md file for more details.
 
-.PHONY: default build install uninstall clean
+.PHONY: default build install uninstall clean check format
 
 TSTL := npx tstl
 
@@ -16,6 +16,10 @@ INSTALL_DIR ?= "/mnt/c/Program Files \(x86\)/World of Warcraft/_retail_/Interfac
 default: build
 build: $(TARGET_DIR) $(TARGET_DIR)/nyrotyc.toc $(TARGET_DIR)/LICENSE.md $(TARGETS)
 
+check:
+	npx prettier --check .
+format:
+	npx prettier --write .
 install: build
 	mkdir -p "$(INSTALL_DIR)"
 	cp -r $(TARGET_DIR)/. "$(INSTALL_DIR)"

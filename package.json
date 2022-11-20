@@ -24,6 +24,7 @@
   "devDependencies": {
     "@wartoshika/wow-declarations": "^9.0.5-release.2",
     "lua-types": "^2.13.0",
+    "prettier": "^2.7.1",
     "typescript": "^4.9.3",
     "typescript-to-lua": "^1.11.0"
   }

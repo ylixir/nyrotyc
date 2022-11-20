@@ -13,6 +13,7 @@
   "tstl": {
     "luaTarget": "universal",
     "luaBundle": "main.lua",
-    "luaBundleEntry": "main.ts"
+    "luaBundleEntry": "main.ts",
+    "noImplicitSelf": true
   }
 }
