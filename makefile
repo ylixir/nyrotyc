@@ -29,6 +29,8 @@ uninstall:
 
 clean:
 	rm -rf $(TARGET_DIR)
+	rm -rf node_modules
+	npm ci
 
 $(TARGET_DIR):
 	@echo "  $@"
