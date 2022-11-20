@@ -1,0 +1,30 @@
+{
+  "name": "nyrotyc",
+  "version": "0.0.1",
+  "description": "Some experimentation with WoW Addon development",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "build": "make"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ylixir/nyrotyc.git"
+  },
+  "keywords": [
+    "WoW",
+    "Warcraft"
+  ],
+  "author": "Jon Allen",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/ylixir/nyrotyc/issues"
+  },
+  "homepage": "https://github.com/ylixir/nyrotyc#readme",
+  "devDependencies": {
+    "@wartoshika/wow-declarations": "^9.0.5-release.2",
+    "lua-types": "^2.13.0",
+    "typescript": "^4.9.3",
+    "typescript-to-lua": "^1.11.0"
+  }
+}

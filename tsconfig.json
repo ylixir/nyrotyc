@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext"],
+    "moduleResolution": "node",
+    "types": ["lua-types/5.1"],
+    "typeRoots": ["./node_modules/@wartoshika/wow-declarations"],
+    "strict": true
+  },
+
+  // Optional: Schema file for hints and validation
+  "$schema": "https://raw.githubusercontent.com/TypeScriptToLua/TypeScriptToLua/master/tsconfig-schema.json",
+  "tstl": {
+    "luaTarget": "universal",
+    "luaBundle": "main.lua",
+    "luaBundleEntry": "main.ts"
+  }
+}
