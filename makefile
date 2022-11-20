@@ -48,6 +48,6 @@ $(TARGET_DIR)/nyrotyc.toc: nyrotyc.toc $(TARGET_DIR)
 	@echo $(MODULES:%=%.lua) | sed -e 's/\.lua\s/.lua\n/g' >> $@
 
 # dist goes second so that the rule can target the source with $<
-$(TARGET_DIR)/%.lua : %.ts $(TARGET_DIR)
+$(TARGET_DIR)/main.lua : src/main.ts src/nyrotapp/index.ts $(TARGET_DIR)
 	@echo "  $@"
 	@$(TSTL) --luaBundleEntry $< --luaBundle $@

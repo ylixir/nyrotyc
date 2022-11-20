@@ -3,7 +3,9 @@
     "target": "esnext",
     "lib": ["esnext"],
     "moduleResolution": "node",
-    "types": ["lua-types/5.1"],
+    "rootDir": "src",
+    "baseUrl": "src",
+    "types": ["lua-types/5.1", "@wartoshika/wow-declarations"],
     "typeRoots": ["./node_modules/@wartoshika/wow-declarations"],
     "strict": true
   },
@@ -12,8 +14,8 @@
   "$schema": "https://raw.githubusercontent.com/TypeScriptToLua/TypeScriptToLua/master/tsconfig-schema.json",
   "tstl": {
     "luaTarget": "universal",
-    "luaBundle": "main.lua",
-    "luaBundleEntry": "main.ts",
+    "luaBundle": "dist/main.lua",
+    "luaBundleEntry": "src/main.ts",
     "noImplicitSelf": true
   }
 }
