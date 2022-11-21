@@ -31,18 +31,18 @@ interface TreeBuilder {
   <M>(
     kind: "frame",
     attributes: Frame<M>["attributes"],
-    children: (ViewResult<M> | null)[],
+    ...children: (ViewResult<M> | null)[]
   ): ViewResult<M> | null
   <M>(
     kind: "button",
     attributes: Button<M>["attributes"],
-    children: (ViewResult<M> | null)[],
+    ...children: (ViewResult<M> | null)[]
   ): ViewResult<M> | null
 }
 export const n: TreeBuilder = <M>(
   kind: Widget<M>["kind"],
   attributes: Widget<M>["attributes"],
-  children: (ViewResult<M> | null)[],
+  ...children: (ViewResult<M> | null)[]
 ): ViewResult<M> | null => {
   const result: ViewResult<M> | null = (() => {
     switch (kind) {
@@ -184,7 +184,19 @@ const button = <M>(attributes: Button<M>["attributes"]): ViewResult<M> => {
     attributes,
   ) as (keyof Button<M>["attributes"])[]
 
+  pcall(
+    (_G as any).ViragDevTool.AddData,
+    (_G as any).ViragDevTool,
+    attributes,
+    "button attributes",
+  )
   const button = allocateButton()
+  pcall(
+    (_G as any).ViragDevTool.AddData,
+    (_G as any).ViragDevTool,
+    button,
+    "button frame",
+  )
   for (const key of keys) {
     switch (key) {
       case "width":

@@ -7,7 +7,9 @@
     "baseUrl": "src",
     "types": ["lua-types/5.1", "@wartoshika/wow-declarations"],
     "typeRoots": ["./node_modules/@wartoshika/wow-declarations"],
-    "strict": true
+    "strict": true,
+    "jsxFactory": "n",
+    "jsx": "react"
   },
 
   // Optional: Schema file for hints and validation

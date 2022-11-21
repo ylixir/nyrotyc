@@ -10,7 +10,6 @@ TSTL := npx tstl
 MODULES := main
 TARGET_DIR := ./dist
 TARGETS := $(MODULES:%=$(TARGET_DIR)/%.lua)
-SOURCES := $(MODULES:%=%.ts)
 INSTALL_DIR ?= "/mnt/c/Program Files \(x86\)/World of Warcraft/_retail_/Interface/Addons/nyrotyc"
 
 default: build
@@ -48,6 +47,6 @@ $(TARGET_DIR)/nyrotyc.toc: nyrotyc.toc $(TARGET_DIR)
 	@echo $(MODULES:%=%.lua) | sed -e 's/\.lua\s/.lua\n/g' >> $@
 
 # dist goes second so that the rule can target the source with $<
-$(TARGET_DIR)/main.lua : src/main.ts src/nyrotapp/index.ts $(TARGET_DIR)
+$(TARGET_DIR)/main.lua : src/main.tsx src/nyrotapp/index.ts $(TARGET_DIR)
 	@echo "  $@"
 	@$(TSTL) --luaBundleEntry $< --luaBundle $@
