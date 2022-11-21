@@ -18,6 +18,7 @@ export const nyrotapp = async <M>({
     widget.frame.SetParent(UIParent)
     const event = await Promise.any(events)
     model = event(model)
+    freeWidget(tree.widget)
   }
 }
 
@@ -133,13 +134,7 @@ const frame = <M>(attributes: Frame<M>["attributes"]): ViewResult<M> => {
     attributes,
   ) as (keyof Widget<M>["attributes"])[]
 
-  print("creating frame")
-  const baseFrame = CreateFrame(
-    "Frame",
-    undefined,
-    UIParent,
-    "BackdropTemplate",
-  )
+  const baseFrame = allocateFrame()
   for (const key of keys) {
     switch (key) {
       case "width":
@@ -189,13 +184,7 @@ const button = <M>(attributes: Button<M>["attributes"]): ViewResult<M> => {
     attributes,
   ) as (keyof Button<M>["attributes"])[]
 
-  print("creating button")
-  const button = CreateFrame(
-    "Button",
-    undefined,
-    UIParent,
-    "UIPanelButtonTemplate",
-  )
+  const button = allocateButton()
   for (const key of keys) {
     switch (key) {
       case "width":
@@ -249,5 +238,45 @@ const button = <M>(attributes: Button<M>["attributes"]): ViewResult<M> => {
       children: [],
     },
     events,
+  }
+}
+
+const widgetPool: {
+  frame: Frame<any>["frame"][]
+  button: Button<any>["frame"][]
+} = {
+  frame: [],
+  button: [],
+}
+
+const allocateButton = <M>(): Button<M>["frame"] =>
+  widgetPool.button.pop() ??
+  CreateFrame("Button", undefined, undefined, "UIPanelButtonTemplate")
+const allocateFrame = <M>(): Frame<M>["frame"] =>
+  widgetPool.frame.pop() ??
+  CreateFrame("Frame", undefined, undefined, "BackdropTemplate")
+
+const freeWidget = <M>(widget: Widget<M>) => {
+  widget.frame.Hide()
+  widget.children.forEach((child) => freeWidget(child))
+  widget.frame.SetParent(null)
+
+  switch (widget.kind) {
+    case "frame":
+      widgetPool[widget.kind] = [...widgetPool[widget.kind], widget.frame]
+      break
+    case "button":
+      widgetPool[widget.kind] = [...widgetPool[widget.kind], widget.frame]
+      // we have to explicitly pass undefined or it crashes
+      widget.frame.SetScript("OnClick", undefined)
+      break
+    default:
+      const invalidWidget: never = widget
+      print(
+        `Attempt to free invalid or unhandled widget: ${
+          (invalidWidget as any).kind
+        }`,
+      )
+      return
   }
 }
